@@ -297,10 +297,10 @@ select count(*) from profile_wos_p7;
   2. 把hadoop集群中的hive-site.xml/core-site.xml/hdfs-site.xml放到fe/conf下，把core-site.xml/hdfs-site.xml放到be/conf下。
   3. 在fe/conf/fe.conf文件中的JAVA_OPTS/JAVA_OPTS_FOR_JDK_9选项加上 -Djava.security.krb5.conf:/etc/krb5.conf，/etc/krb5.conf是krb5.conf文件的路径，可以根据自己的系统调整。
   4. resource中的uri地址一定要使用域名，并且相应的hive和hdfs的域名与ip的映射都需要配置到/etc/hosts中。
-* S3 支持:
-  2.0.1及之后的版本默认不开启此功能，可以按照以下步骤配置后使用。
-  1. 下载[依赖库](https://cdn-thirdparty.starrocks.com/hive_S3_jar.tar.gz)并添加到fe/lib/和be/lib/hadoop/hdfs/路径下。
-  2. 在fe/conf/core-site.xml和be/conf/core-site.xml中加入如下配置，并重启fe和be。
+
+#### S3 支持
+
+一. 在fe/conf/core-site.xml中加入如下配置。
 
 ~~~xml
 <configuration>
@@ -323,10 +323,60 @@ select count(*) from profile_wos_p7;
 </configuration>
 ~~~
 
-  1. `fs.s3a.access.key` 指定aws的access key id
-  2. `fs.s3a.secret.key` 指定aws的secret access key
-  3. `fs.s3a.endpoint` 指定aws的区域
-  4. `fs.s3a.connection.maximum` 配置最大链接数，如果查询过程中有报错`Timeout waiting for connection from poll`，可以适当调高该参数
+* `fs.s3a.access.key` 指定aws的access key id
+* `fs.s3a.secret.key` 指定aws的secret access key
+* `fs.s3a.endpoint` 指定aws的区域
+* `fs.s3a.connection.maximum` 配置最大链接数，如果查询过程中有报错`Timeout waiting for connection from poll`，可以适当调高该参数
+
+二. 在be/conf/be.conf中加入如下配置。
+
+* `object_storage_access_key_id` 与FE端core-site.xml配置`fs.s3a.access.key`相同
+* `object_storage_secret_access_key` 与FE端core-site.xml配置`fs.s3a.secret.key`相同
+* `object_storage_endpoint` 与FE端core-site.xml配置`fs.s3a.endpoint`相同
+
+三. 重启FE，BE。
+
+#### Aliyun OSS 支持
+
+一. 在fe/conf/core-site.xml中加入如下配置。
+
+~~~xml
+<configuration>
+   <property>
+      <name>fs.oss.impl</name>
+      <value>org.apache.hadoop.fs.aliyun.oss.AliyunOSSFileSystem</value>
+   </property>
+   <property>
+      <name>fs.AbstractFileSystem.oss.impl</name>
+      <value>com.aliyun.emr.fs.oss.OSS</value>
+   </property>
+   <property>
+        <name>fs.oss.accessKeyId</name>
+        <value>xxx</value>
+    </property>
+    <property>
+        <name>fs.oss.accessKeySecret</name>
+        <value>xxx</value>
+    </property>
+    <property>
+        <name>fs.oss.endpoint</name>
+        <!-- 以下以北京地域为例，其他地域请根据实际情况替换。 -->
+        <value>oss-cn-beijing.aliyuncs.com</value>
+    </property>
+</configuration>
+~~~
+
+* `fs.oss.accessKeyId` 指定oss的access key id
+* `fs.oss.accessKeySecret` 指定oss的access key secret
+* `fs.oss.endpoint` 指定oss的区域
+
+二. 在be/conf/be.conf中加入如下配置。
+
+* `object_storage_access_key_id` 与FE端core-site.xml配置`fs.oss.accessKeyId`相同
+* `object_storage_secret_access_key` 与FE端core-site.xml配置`fs.oss.accessKeySecret`相同
+* `object_storage_endpoint` 与FE端core-site.xml配置`fs.oss.endpoint`相同
+
+三. 重启FE，BE。
 
 ### 缓存更新
 
