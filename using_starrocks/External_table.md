@@ -292,7 +292,8 @@ select count(*) from profile_wos_p7;
 * fe配置文件路径为fe/conf，如果需要自定义hadoop集群的配置可以在该目录下添加配置文件，例如：hdfs集群采用了高可用的nameservice，需要将hadoop集群中的hdfs-site.xml放到该目录下，如果hdfs配置了viewfs，需要将core-site.xml放到该目录下。
 * be配置文件路径为be/conf，如果需要自定义hadoop集群的配置可以在该目录下添加配置文件，例如：hdfs集群采用了高可用的nameservice，需要将hadoop集群中的hdfs-site.xml放到该目录下，如果hdfs配置了viewfs，需要将core-site.xml放到该目录下。
 * be所在的机器也需要配置JAVA_HOME，一定要配置成jdk环境，不能配置成jre环境
-* kerberos 支持：
+
+#### kerberos 支持
   1. 在所有的fe/be机器上用`kinit -kt keytab_path principal`登陆，该用户需要有访问hive和hdfs的权限。kinit命令登陆是有实效性的，需要将其放入crontab中定期执行。
   2. 把hadoop集群中的hive-site.xml/core-site.xml/hdfs-site.xml放到fe/conf下，把core-site.xml/hdfs-site.xml放到be/conf下。
   3. 在fe/conf/fe.conf文件中的JAVA_OPTS/JAVA_OPTS_FOR_JDK_9选项加上 -Djava.security.krb5.conf:/etc/krb5.conf，/etc/krb5.conf是krb5.conf文件的路径，可以根据自己的系统调整。
@@ -424,7 +425,7 @@ DISTRIBUTED BY HASH(k1) BUCKETS 10
 PROPERTIES
 (
     "host" = "127.0.0.1",
-    "port" = "9030",
+    "port" = "9020",
     "user" = "user",
     "password" = "passwd",
     "database" = "db_test",
@@ -524,21 +525,13 @@ USE iceberg_test;
 
 ~~~sql
 CREATE EXTERNAL TABLE `iceberg_tbl` ( 
-
 `id` bigint NULL, 
-
 `data` varchar(200) NULL 
-
 ) ENGINE=ICEBERG 
-
 PROPERTIES ( 
-
 "resource" = "iceberg0", 
-
 "database" = "iceberg", 
-
 "table" = "iceberg_table" 
-
 ); 
 ~~~
 
