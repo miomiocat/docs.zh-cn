@@ -300,7 +300,7 @@ select count(*) from profile_wos_p7;
 
 #### S3 支持
 
-一. 在fe/conf/core-site.xml中加入如下配置。
+一. 在$FE_HOME/conf/core-site.xml中加入如下配置。
 
 ~~~xml
 <configuration>
@@ -328,7 +328,7 @@ select count(*) from profile_wos_p7;
 * `fs.s3a.endpoint` 指定aws的区域
 * `fs.s3a.connection.maximum` 配置最大链接数，如果查询过程中有报错`Timeout waiting for connection from poll`，可以适当调高该参数
 
-二. 在be/conf/be.conf中加入如下配置。
+二. 在$BE_HOME/conf/be.conf中加入如下配置。
 
 * `object_storage_access_key_id` 与FE端core-site.xml配置`fs.s3a.access.key`相同
 * `object_storage_secret_access_key` 与FE端core-site.xml配置`fs.s3a.secret.key`相同
@@ -338,7 +338,7 @@ select count(*) from profile_wos_p7;
 
 #### Aliyun OSS 支持
 
-一. 在fe/conf/core-site.xml中加入如下配置。
+一. 在$FE_HOME/conf/core-site.xml中加入如下配置。
 
 ~~~xml
 <configuration>
@@ -374,7 +374,7 @@ select count(*) from profile_wos_p7;
   * 根据Endpoint与地域的对应关系进行查找，请参见[访问域名和数据中心](https://help.aliyun.com/document_detail/31837.htm#concept-zt4-cvy-5db)。
   * 您可以登录[阿里云OSS管理控制台](https://oss.console.aliyun.com/index?spm=a2c4g.11186623.0.0.11d24772leoEEg#/)，进入Bucket 概览页，Bucket域名examplebucket.oss-cn-hangzhou.aliyuncs.com的后缀部分oss-cn-hangzhou.aliyuncs.com，即为该Bucket的外网Endpoint。
 
-二. 在be/conf/be.conf中加入如下配置。
+二. 在$BE_HOME/conf/be.conf中加入如下配置。
 
 * `object_storage_access_key_id` 与FE端core-site.xml配置`fs.oss.accessKeyId`相同
 * `object_storage_secret_access_key` 与FE端core-site.xml配置`fs.oss.accessKeySecret`相同
