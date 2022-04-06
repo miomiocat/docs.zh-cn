@@ -305,6 +305,14 @@ select count(*) from profile_wos_p7;
 ~~~xml
 <configuration>
    <property>
+      <name>fs.s3a.impl</name>
+      <value>org.apache.hadoop.fs.s3a.S3AFileSystem</value>
+   </property>
+   <property>
+      <name>fs.AbstractFileSystem.s3a.impl</name>
+      <value>org.apache.hadoop.fs.s3a.S3A</value>
+   </property>
+   <property>
       <name>fs.s3a.access.key</name>
       <value>******</value>
    </property>
