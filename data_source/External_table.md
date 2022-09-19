@@ -1022,7 +1022,7 @@ PROPERTIES (
 * 您可以按照业务需求选择 Hudi 表中的全部或部分列。
 * 创建外部表时，需根据 Hudi 表列类型指定 StarRocks 中外部表列类型，具体映射关系如下：
 
-| **Hudi parquet avro type**       | **StarRocks type **     |
+| **Hudi type**                    | **StarRocks type **     |
 | ----------------------------     | ----------------------- |
 | BOOLEAN                          | BOOLEAN                 |
 | INT                              | INT                     |
