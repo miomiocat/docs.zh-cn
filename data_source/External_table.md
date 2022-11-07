@@ -940,7 +940,7 @@ StarRocks 支持通过外表的方式查询 Hudi 数据湖中的数据，帮助�
 
 * Hudi 外表只能用于查询操作，不支持写入。
 * 当前支持 Hudi 的表类型为 Copy on Write（下文简称 COW）和 Merge on read（下文简称 MOR）。COW 和 MOR 之间的更多区别，请参见 [Apache Hudi 官网](https://hudi.apache.org/docs/table_types)。
-* 当前支持 Hudi 表的查询类型有 Snapshot Queries 和 Read Optimized Queries (仅针对 MOR 表)，暂不支持 Incremental Queries。有关 Hudi 查询类型的说明，请参见 [Table & Query Types](https://hudi.apache.org/docs/next/table_types/#query-types)。
+* 当前支持的 Hudi 查询类型有 Snapshot Queries 和 Read Optimized Queries (仅针对 MOR 表)，暂不支持 Incremental Queries。有关 Hudi 查询类型的说明，请参见 [Table & Query Types](https://hudi.apache.org/docs/next/table_types/#query-types)。
 * 支持 Hudi 文件的压缩格式为 GZIP（默认值），ZSTD，LZ4 和 SNAPPY。
 * StarRocks 暂不支持同步 Hudi 表结构。如果 Hudi 表结构发生变化，您需要在 StarRocks 中删除相应的外部表并重新创建。
 
