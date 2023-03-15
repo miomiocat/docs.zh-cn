@@ -45,7 +45,7 @@ INTO TABLE <table_name>
 [PARTITION (<partition_name>[, <partition_name> ...])]
 [FORMAT AS "CSV | Parquet | ORC"]
 [COLUMNS TERMINATED BY "<column_separator>"]
-[ROWS TERMINATED BY "<rows_separator>"]
+[ROWS TERMINATED BY "<row_separator>"]
 [(column_list)]
 [COLUMNS FROM PATH AS (<partition_field_name>[, <partition_field_name> ...])]
 [SET <k1=f1(v1)>[, <k2=f2(v2)> ...]]
@@ -112,7 +112,7 @@ INTO TABLE <table_name>
 
   用于指定源数据文件中的行分隔符。如果不指定该参数，则默认行分隔符为 `\n`，即换行符。必须确保这里指定的行分隔符与源数据文件中的行分隔符一致；否则，导入作业会因数据质量错误而失败，作业状态 (`State`) 会显示为 `CANCELLED`。
 
-  其他注意事项和使用条件与上文通过`COLUMNS TERMINATED BY` 指定的列分隔符相同。
+  其他注意事项和使用条件与上文通过 `COLUMNS TERMINATED BY` 指定列分隔符相同。
 
 - `column_list`
 
